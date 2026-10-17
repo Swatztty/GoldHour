@@ -1,0 +1,16 @@
+{
+  "hosting": {
+    "public": "firebase-public",
+    "ignore": ["**/.*"],
+    "rewrites": [
+      {
+        "source": "**",
+        "run": { "serviceId": "golden-hour", "region": "asia-south1" }
+      }
+    ]
+  },
+  "firestore": {
+    "rules": "firestore.rules",
+    "indexes": "firestore.indexes.json"
+  }
+}

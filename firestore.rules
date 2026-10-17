@@ -1,0 +1,16 @@
+rules_version = '2';
+
+// All writes go through the Cloud Run service (Admin SDK), which bypasses these rules.
+// Browsers may only read tiny anonymous "network_events" (time, country, ring) so open
+// network consoles update instantly. Reports themselves are never readable from the browser.
+service cloud.firestore {
+  match /databases/{database}/documents {
+    match /network_events/{id} {
+      allow read: if request.auth != null;
+      allow write: if false;
+    }
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
